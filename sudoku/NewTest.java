@@ -1,12 +1,11 @@
 package sudoku;
 
-public class Sudoku {
-
+public class NewTest {
 	int[][] board;
 	int size = 9;
 	int empty = 0;
 
-	public Sudoku(int[][] board) {
+	public NewTest(int[][] board) {
 		this.board = new int[size][size];
 
 		for (int i = 0; i < size; i++) {
@@ -16,20 +15,20 @@ public class Sudoku {
 		}
 	}
 
-	private boolean inRowCheck(int row, int collum, int number) {
+	private boolean inRowCheck(int row, int collumn, int number) {
 		for (int i = 0; i < size; i++) {
-			int comparation = board[row][i];
-			if (comparation != empty && collum != i && comparation == number) {
+			int comparison = board[row][i];
+			if (comparison != empty && collumn != i && comparison == number) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private boolean inCollumCheck(int collum, int row, int number) {
+	private boolean inCollumCheck(int row, int collum, int number) {
 		for (int i = 0; i < size; i++) {
-			int compration = board[i][collum];
-			if (compration != empty && row != i && compration == number) {
+			int comparison = board[i][collum];
+			if (comparison != empty && i != row && comparison == number) {
 				return true;
 			}
 		}
@@ -43,12 +42,13 @@ public class Sudoku {
 
 		for (int i = rowCheck; i < rowCheck + 3; i++) {
 			for (int j = collumCheck; j < collumCheck + 3; j++) {
-				int comparation = board[i][j];
-				if (comparation != empty && i != row && j != collum && comparation == number)
+				int comparison = board[i][j];
+				if (comparison != empty && i != row && j != collum && comparison == number)
 					return true;
 			}
 		}
 		return false;
+
 	}
 
 	private boolean isOk(int row, int collum, int number) {
@@ -56,8 +56,8 @@ public class Sudoku {
 		boolean inColumnCheck = inCollumCheck(row, collum, number);
 		boolean inBoxCheck = inBoxCheck(row, collum, number);
 		boolean check = !inRowCheck && !inColumnCheck && !inBoxCheck;
-		System.out.println("Row : " + row + " Collumn : " + collum + " Number : " + number + " " + check + " "
-				+ inRowCheck + " " + inColumnCheck + " " + inBoxCheck);
+		System.out
+				.println("Row : " + row + " Collumn : " + collum + " Number : " + number + " " + check + " " + inRowCheck + " " + inColumnCheck + " " + inBoxCheck);
 		return check;
 	}
 
@@ -70,6 +70,7 @@ public class Sudoku {
 				}
 			}
 		}
+
 		return true;
 	}
 
@@ -92,15 +93,15 @@ public class Sudoku {
 
 	public static void main(String[] args) {
 
-		Sudoku sudoku = new Sudoku(GRID_TO_SOLVE);
+		NewTest sudoku = new NewTest(GRID_TO_SOLVE);
 		System.out.println("grid to solve");
 		sudoku.display();
 
-		if (sudoku.algorithmValidation()) {
+		boolean isValid = sudoku.algorithmValidation();
+		if (isValid) {
 			System.out.println("grid solved with bt");
-			//sudoku.algorithmValidation();
+			sudoku.display();
 		}
-		System.out.println(sudoku.algorithmValidation());
 	}
 
 }
